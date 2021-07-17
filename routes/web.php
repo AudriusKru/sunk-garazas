@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\MechanicController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group(['prefix' => 'mechanics'], function(){
+    Route::get('', [MechanicController::class, 'index'])->name('mechanic.index');
+    Route::get('create', [MechanicController::class, 'create'])->name('mechanic.create');
+    Route::post('store', [MechanicController::class, 'store'])->name('mechanic.store');
+    Route::get('edit/{mechanic}', [MechanicController::class, 'edit'])->name('mechanic.edit');
+    Route::post('update/{mechanic}', [MechanicController::class, 'update'])->name('mechanic.update');
+    Route::post('delete/{mechanic}', [MechanicController::class, 'destroy'])->name('mechanic.destroy');
+    Route::get('show/{mechanic}', [MechanicController::class, 'show'])->name('mechanic.show');
+    });
